@@ -1,0 +1,95 @@
+# Git 与代码版本管理学习笔记
+
+## 一、学习资料来源
+- [Pro Git Book](https://git-scm.com/book/en/v2)：Git 官方文档，内容全面且易于理解。
+- [GitHub 官方文档](https://docs.github.com/)：提供了 GitHub 平台的详细使用方法。
+- [Gitee 官方文档](https://gitee.com/help)：Gitee 的使用指南，适合国内用户。
+
+## 二、实践流程
+1. **安装与配置 Git**
+   - 在 Windows 系统上，从 [Git 官方网站](https://git-scm.com/download/win) 下载并安装 Git。
+   - 配置全局用户名和电子邮件地址：
+     ```bash
+     git config --global user.name "Your Name"
+     git config --global user.email "your_email@example.com"
+     ```
+
+2. **创建本地仓库**
+   - 创建项目文件夹并初始化本地仓库：
+     ```bash
+     mkdir my_project
+     cd my_project
+     git init
+     ```
+
+3. **添加远程仓库**
+   - 注册 Gitee 或 GitHub 账号，并创建远程仓库。
+   - 将远程仓库地址添加到本地仓库：
+     ```bash
+     git remote add origin <远程仓库地址>
+     ```
+
+4. **提交代码**
+   - 创建文件并添加到暂存区：
+     ```bash
+     echo "# My Project" > README.md
+     git add README.md
+     ```
+   - 提交文件到本地仓库：
+     ```bash
+     git commit -m "Initial commit"
+     ```
+   - 推送代码到远程仓库：
+     ```bash
+     git push -u origin master
+     ```
+
+5. **多次提交与变更观察**
+   - 修改文件并提交：
+     ```bash
+     echo "This is an example file." > example.txt
+     git add example.txt
+     git commit -m "Second commit: Added example.txt"
+     git push
+     ```
+   - 继续修改并提交：
+     ```bash
+     echo "This file has been updated." > example.txt
+     git add example.txt
+     git commit -m "Third commit: Updated example.txt"
+     git push
+     ```
+
+6. **配置 SSH 密钥**
+   - 生成 SSH 密钥：
+     ```bash
+     ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+     ```
+   - 将公钥添加到 GitHub 或 Gitee：
+     - 打开公钥文件 `C:\Users\<你的用户名>\.ssh\id_rsa.pub`，复制其内容。
+     - 在 GitHub 或 Gitee 的“SSH and GPG keys”页面添加公钥。
+
+7. **更改远程仓库地址为 SSH 方式**
+   ```bash
+   git remote set-url origin git@github.com:your_username/your_repo.git
+   ```
+
+## 三、遇到的困难及解决方法
+1. **问题**：无法推送代码到远程仓库。
+   - **解决方法**：检查 SSH 密钥是否正确添加到 GitHub 或 Gitee，并确保远程仓库地址正确。
+   - **具体操作**：重新生成 SSH 密钥并添加到 GitHub，确保使用正确的远程仓库地址。
+
+2. **问题**：提交历史显示为空。
+   - **解决方法**：确保本地仓库中有文件，并正确执行 `git add` 和 `git commit`。
+   - **具体操作**：创建文件并添加到暂存区，然后提交。
+
+3. **问题**：SSH 连接失败。
+   - **解决方法**：确保 SSH 代理正在运行，并正确添加了私钥。
+   - **具体操作**：
+     ```bash
+     eval $(ssh-agent -s)
+     ssh-add C:\Users\<你的用户名>\.ssh\id_rsa
+     ```
+
+## 四、心得
+通过本次实践，我掌握了 Git 和 GitHub/Gitee 的基本操作，包括代码管理、版本控制和远程仓库的使用。这些技能将为我未来的项目开发提供有力支持。我学会了如何生成和配置 SSH 密钥，确保代码的安全传输。同时，我也了解了如何通过多次提交观察代码的变更历史，这对于团队协作和代码管理非常有帮助。
